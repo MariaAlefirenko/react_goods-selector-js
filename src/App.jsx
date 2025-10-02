@@ -30,11 +30,13 @@ export const App = () => {
     ? `${selectedGood} is selected`
     : 'No goods selected';
 
+  const hasSelection = Boolean(selectedGood); // 👈 удобно вынести один раз
+
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {titleText}
-        {selectedGood && (
+        {hasSelection && (
           <button
             data-cy="ClearButton"
             type="button"
@@ -56,7 +58,7 @@ export const App = () => {
                 className={isSelected ? 'has-background-success-light' : ''}
               >
                 <td>
-                  {isSelected ? (
+                  {isSelected && (
                     <button
                       data-cy="RemoveButton"
                       type="button"
@@ -65,7 +67,9 @@ export const App = () => {
                     >
                       -
                     </button>
-                  ) : (
+                  )}
+
+                  {!isSelected && !hasSelection && (
                     <button
                       data-cy="AddButton"
                       type="button"
